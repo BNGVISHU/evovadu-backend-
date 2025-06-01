@@ -41,4 +41,12 @@ app.post('/verify-google-token', async (req, res) => {
   }
 });
 
+app.use((req, res, next) => {
+  if (req.url.includes('/help')) {
+    res.send('this works fine');
+  } else {
+    next();
+  }
+});
+
 app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));
