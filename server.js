@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const { OAuth2Client } = require('google-auth-library');
+const { use } = require('react');
 require('dotenv').config();
 
 const app = express();
@@ -55,7 +56,8 @@ app.post('/', async (req, res) => {
 
 app.get("/profile",(req,res)=>{
   const user = req.cookies.user
-  res.json(user)
+  res.json({user})
+  console.log(user)
 })
 
 
