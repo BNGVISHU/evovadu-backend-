@@ -14,7 +14,14 @@ const client = new OAuth2Client(CLIENT_ID);
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: 'https://bngvishu.github.io',
+  origin: function (origin, callback) {
+    const allowedOrigins = ["https://bngvishu.github.io"];
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
   credentials: true
 }));
 
@@ -55,6 +62,7 @@ app.post('/', async (req, res) => {
 });
 
 app.get("/profile",(req,res)=>{
+  res.setHeader("Access-Control-Allow-Credentials", "true");
   const user = req.cookies.user
   res.json({user})
   console.log(user)
