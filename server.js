@@ -54,7 +54,7 @@ app.post('/', async (req, res) => {
   }
 });
 
-app.get("/profile",(req,res)=>{
+app.use("/profile",(req,res)=>{
   const user = req.cookies.user
   res.json({user})
   console.log(user)
