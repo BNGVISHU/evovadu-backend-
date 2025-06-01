@@ -13,7 +13,7 @@ const client = new OAuth2Client(CLIENT_ID);
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors({
-  origin: 'https://bngvishu.github.io/evovadu/client',
+  origin: 'https://bngvishu.github.io/',
   credentials: true
 }));
 
