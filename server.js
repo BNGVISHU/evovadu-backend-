@@ -17,7 +17,7 @@ app.use(cors({
   credentials: true
 }));
 
-app.post('/verify-google-token', async (req, res) => {
+app.post('/', async (req, res) => {
   const { token } = req.body;
 
   try {
