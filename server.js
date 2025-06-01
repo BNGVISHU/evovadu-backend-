@@ -28,10 +28,22 @@ app.post('/', async (req, res) => {
 
     const payload = ticket.getPayload();
     const email = payload.email;
+    const userdata = {
+      name : payload.name,
+      email: payload.email,
+      profilePicture : payload.picture
+    }
 
     res.cookie('session-token', token, {
       httpOnly: true,
-      sameSite: 'Lax',
+      secure:true,
+      sameSite: 'none',
+      maxAge: 3600000
+    });
+
+    res.cookie("user",JSON.stringify(userdata),{
+      sameSite : "none",
+      secure : "yes",
       maxAge: 3600000
     });
 
@@ -40,6 +52,12 @@ app.post('/', async (req, res) => {
     res.status(401).json({ success: false, message: 'Invalid token' });
   }
 });
+
+app.get("/profile",(req,res)=>{
+  const user = req.cookies.user
+  res.json(user)
+})
+
 
 app.use((req, res, next) => {
   if (req.url.includes('/help')) {
