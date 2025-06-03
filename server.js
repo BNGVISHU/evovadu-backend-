@@ -49,7 +49,7 @@ app.post('/', async (req, res) => {
       maxAge: 3600000
     });
 
-    res.cookie("user",JSON.stringify(userdata),{
+    res.cookie("user",userdata,{
       sameSite : "none",
       secure : "yes",
       maxAge: 3600000
